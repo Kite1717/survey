@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { store } from "../firebase";
 import { Button, Spinner, Col } from "react-bootstrap";
 import Swal from "sweetalert2";
+import RoundReview from "./RoundReview";
+
+import axios from "axios";
 function Round({
   user,
   suitable,
@@ -9,7 +12,11 @@ function Round({
   findRemainVote,
   getRoundInfo,
   setStartVote,
+  isReviewRoundVideos,
+  isReviewRound,
+  roundName,
 }) {
+  console.log(roundName, "sadsadsadsa");
   useEffect(() => {
     if (user !== null && user !== undefined && user.emailVerified) {
       checkVoted(user.email);
@@ -67,6 +74,24 @@ function Round({
             .update({ voted: true })
             .then(() => {
               //refresh vote remains
+
+              axios
+                .get("http://localhost:5000/api/user/next-round")
+                .then(async () => {
+                  let reload = await getRoundInfo();
+                  Swal.fire({
+                    icon: "info",
+                    title:
+                      "Bu tur bitmiştir.Bir sonraki tura yönlendiriliyorsunuz..",
+                    timer: 2000,
+                    showConfirmButton: false,
+                  }).then(() => {
+                    //refresh page
+                    localStorage.removeItem("user");
+                    window.location.reload();
+                  });
+                })
+                .catch(() => {});
               findRemainVote();
               setLoading(false);
             });
@@ -92,53 +117,66 @@ function Round({
   };
   return (
     <>
-      {videos.map((item, i) => {
-        return (
-          <Col
-            style={{ padding: "0 !important" }}
-            className="text-center"
-            key={i}
-            xs={12}
-            md={6}
-            lg={3}
-          >
-            <div className="if-container">
-              <iframe
-                allowFullScreen="allowfullscreen"
-                mozallowfullscreen="mozallowfullscreen"
-                msallowfullscreen="msallowfullscreen"
-                oallowfullscreen="oallowfullscreen"
-                webkitallowfullscreen="webkitallowfullscreen"
-                className="responsive-iframe"
-                src={item.url}
-              ></iframe>
-            </div>
-            <br />
-            <span
-              style={{ fontFamily: "'Anton', sans-serif", fontSize: "1.6rem" }}
-            >
-              {" "}
-              {item.vote + "  Oy  ✔️"}
-            </span>
-            <br />
-            <br />
-
-            {loading ? (
-              <Spinner animation="border" variant="primary" />
-            ) : (
-              <Button
-                className="mb-3"
-                variant={!suitable ? "secondary" : "primary"}
-                type="button"
-                disabled={!suitable}
-                onClick={() => applyVote(item)}
+      {!isReviewRound ? (
+        <>
+          {videos.map((item, i) => {
+            return (
+              <Col
+                style={{ padding: "0 !important" }}
+                className="text-center"
+                key={i}
+                xs={12}
+                md={6}
+                lg={3}
               >
-                Oy ver
-              </Button>
-            )}
-          </Col>
-        );
-      })}
+                <div className="if-container">
+                  <iframe
+                    allowFullScreen="allowfullscreen"
+                    mozallowfullscreen="mozallowfullscreen"
+                    msallowfullscreen="msallowfullscreen"
+                    oallowfullscreen="oallowfullscreen"
+                    webkitallowfullscreen="webkitallowfullscreen"
+                    className="responsive-iframe"
+                    src={item.url}
+                  ></iframe>
+                </div>
+                <br />
+                {roundName !== "4. Tur" && (
+                  <>
+                    <span
+                      style={{
+                        fontFamily: "'Anton', sans-serif",
+                        fontSize: "1.6rem",
+                      }}
+                    >
+                      {" "}
+                      {item.vote + "  Oy  ✔️"}
+                    </span>
+                    <br />
+                    <br />
+                  </>
+                )}
+
+                {loading ? (
+                  <Spinner animation="border" variant="primary" />
+                ) : (
+                  <Button
+                    className="mb-3"
+                    variant={!suitable ? "secondary" : "primary"}
+                    type="button"
+                    disabled={!suitable}
+                    onClick={() => applyVote(item)}
+                  >
+                    Oy ver
+                  </Button>
+                )}
+              </Col>
+            );
+          })}
+        </>
+      ) : (
+        <RoundReview isReviewRoundVideos={isReviewRoundVideos} />
+      )}
     </>
   );
 }

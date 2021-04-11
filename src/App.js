@@ -15,6 +15,13 @@ function App() {
 
   const [roundName, setRoundName] = useState("");
   const [remainVote, setRemainVote] = useState(0);
+
+  //Navbar
+  const [isReviewRound, setIsReviewRound] = useState(false);
+  const [isReviewRoundVideos, setIsReviewRoundVideos] = useState([]);
+
+  //********** */
+
   const findRemainVote = async () => {
     const response = store.collection("videos");
     const data = await response.get();
@@ -76,7 +83,10 @@ function App() {
         setUser={setUser}
         roundName={roundName}
       />
-      <Navbar />
+      <Navbar
+        setIsReviewRound={setIsReviewRound}
+        setIsReviewRoundVideos={setIsReviewRoundVideos}
+      />
       <Row className="mt-4">
         <Round
           setStartVote={setStartVote}
@@ -86,6 +96,9 @@ function App() {
           suitable={suitable}
           user={user}
           setUser={setUser}
+          isReviewRound={isReviewRound}
+          isReviewRoundVideos={isReviewRoundVideos}
+          roundName={roundName}
         />
       </Row>
     </Container>

@@ -3,7 +3,7 @@ import { Button, Table } from "react-bootstrap";
 
 import { store } from "../firebase";
 
-function Navbar() {
+function Navbar({ setIsReviewRound, setIsReviewRoundVideos }) {
   const [currentTour, setCurrentTour] = useState(null);
 
   const [currentShowTour, setCurrentShowTour] = useState(1);
@@ -28,6 +28,7 @@ function Navbar() {
             disabled={!checkRoundEnable(1)}
             className="px-5 mx-3"
             variant={checkRoundEnable(1) ? "info" : "secondary"}
+            onClick={() => getRoundVideos(1)}
           >
             1.Tur
           </Button>
@@ -37,6 +38,7 @@ function Navbar() {
             disabled={!checkRoundEnable(2)}
             className="px-5  mx-3"
             variant={checkRoundEnable(2) ? "info" : "secondary"}
+            onClick={() => getRoundVideos(2)}
           >
             2.Tur
           </Button>
@@ -46,6 +48,7 @@ function Navbar() {
             disabled={!checkRoundEnable(3)}
             className="px-5  mx-3"
             variant={checkRoundEnable(3) ? "info" : "secondary"}
+            onClick={() => getRoundVideos(3)}
           >
             3.Tur
           </Button>
@@ -55,6 +58,7 @@ function Navbar() {
             disabled={!checkRoundEnable(4)}
             className="px-5 mx-3"
             variant={checkRoundEnable(4) ? "info" : "secondary"}
+            onClick={() => getRoundVideos(4)}
           >
             Final
           </Button>
@@ -63,11 +67,19 @@ function Navbar() {
     );
   };
 
-  const changeTourInfo = (round) => {
-    if (round !== currentShowTour) {
+  const getRoundVideos = async (round) => {
+    if (currentTour.count !== round) {
+      const response = store
+        .collection(`reviewRound${round}`)
+        .orderBy("vote", "desc");
+      const data = await response.get();
+
+      setIsReviewRoundVideos(data.docs);
+      setIsReviewRound(true);
+    } else {
+      setIsReviewRound(false);
     }
   };
-
   const checkRoundEnable = (round) => {
     if (currentTour) {
       return currentTour.count >= round;
