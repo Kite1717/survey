@@ -39,18 +39,6 @@ function App() {
     getRoundInfo();
   };
 
-  const setRoundInfo = async () => {
-    const response = store.collection("currentRound");
-    const data = await response.get();
-
-    data.docs.forEach((item) => {
-      setRoundName(item.data().count + 1 + ". Tur");
-      response.doc("XEAGN1JpsG30ETJcZX9N").set({
-        count: item.data().count + 1,
-      });
-    });
-  };
-
   const getRoundInfo = async () => {
     const response = store.collection("currentRound");
     const data = await response.get();

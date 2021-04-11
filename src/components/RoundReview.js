@@ -21,6 +21,7 @@ function RoundReview({ isReviewRoundVideos }) {
           >
             <div className="if-container">
               <iframe
+                title="Video"
                 allowFullScreen="allowfullscreen"
                 mozallowfullscreen="mozallowfullscreen"
                 msallowfullscreen="msallowfullscreen"

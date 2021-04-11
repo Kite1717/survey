@@ -26,6 +26,7 @@ function EmailValidate({
 
       setFinal(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roundName]);
 
   useEffect(() => {
@@ -45,6 +46,7 @@ function EmailValidate({
     });
 
     return unsub;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sendUserEmailVerification = async (user, resend) => {

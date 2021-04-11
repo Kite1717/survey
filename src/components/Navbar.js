@@ -6,7 +6,6 @@ import { store } from "../firebase";
 function Navbar({ setIsReviewRound, setIsReviewRoundVideos }) {
   const [currentTour, setCurrentTour] = useState(null);
 
-  const [currentShowTour, setCurrentShowTour] = useState(1);
   useEffect(() => {
     getRoundInfo();
   }, []);

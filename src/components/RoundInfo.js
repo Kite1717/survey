@@ -5,6 +5,7 @@ function RoundInfo({ findRemainVote, remainVote, roundName }) {
   //get max remains 300 vote and update round Info
   useEffect(() => {
     findRemainVote();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

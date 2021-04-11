@@ -23,6 +23,8 @@ function Round({
     } else if (user === null || user === undefined) {
       setStartVote(false);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const [loading, setLoading] = useState(false);
@@ -80,7 +82,6 @@ function Round({
                   "https://mithat-anket-back.herokuapp.com/api/user/next-round"
                 )
                 .then(async () => {
-                  let reload = await getRoundInfo();
                   Swal.fire({
                     icon: "info",
                     title:
@@ -133,6 +134,7 @@ function Round({
               >
                 <div className="if-container">
                   <iframe
+                    title="Video"
                     allowFullScreen="allowfullscreen"
                     mozallowfullscreen="mozallowfullscreen"
                     msallowfullscreen="msallowfullscreen"
