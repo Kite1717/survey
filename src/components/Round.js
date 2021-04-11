@@ -76,7 +76,9 @@ function Round({
               //refresh vote remains
 
               axios
-                .get("http://localhost:5000/api/user/next-round")
+                .get(
+                  "https://mithat-anket-back.herokuapp.com/api/user/next-round"
+                )
                 .then(async () => {
                   let reload = await getRoundInfo();
                   Swal.fire({
