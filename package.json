@@ -2,7 +2,7 @@
   "name": "survey-2021",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://1881ogrenciyeburs.com/",
+  "homepage": "/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.5",
@@ -33,14 +33,17 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+        ">0.2%",
+        "not dead",
+        "not op_mini all",
+        "ie 11"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version",
+        "last 1 edge version",
+        "IE 11"
     ]
-  }
+}
 }
