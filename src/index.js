@@ -7,9 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 
-import "core-js/fn/number/is-nan";
-import "core-js/es6";
-import "core-js/es7";
+import "core-js";
 import "raf/polyfill";
 
 ReactDOM.render(
