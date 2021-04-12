@@ -130,15 +130,15 @@ function EmailValidate({
                     const errors = {};
                     if (!values.email) {
                       errors.email = "E posta adresiniz boş olamaz.";
-                    } 
-                    else if (
-                      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                        values.email
-                      )
-                    ) {
-                      errors.email =
-                        "Lütfen geçerli bir e-posta adresi giriniz.";
                     }
+                    // else if (
+                    //   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                    //     values.email
+                    //   )
+                    // ) {
+                    //   errors.email =
+                    //     "Lütfen geçerli bir e-posta adresi giriniz.";
+                    // }
                     return errors;
                   }}
                   onSubmit={(values, { setSubmitting }) => {
