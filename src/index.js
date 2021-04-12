@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'raf/polyfill';
+import 'core-js/es/map';
+import 'core-js/es/set';
 ReactDOM.render(
   <React.StrictMode>
     <App />
