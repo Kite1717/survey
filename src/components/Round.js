@@ -149,7 +149,7 @@ function Round({
                   <>
                     <span
                       style={{
-                        fontFamily: "'Anton', sans-serif",
+                        // fontFamily: "'Anton', sans-serif",
                         fontSize: "1.6rem",
                       }}
                     >
