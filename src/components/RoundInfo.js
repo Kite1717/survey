@@ -13,7 +13,7 @@ function RoundInfo({ findRemainVote, remainVote, roundName }) {
       <Card bg={"dark"} text={"light"}>
         <Card.Body className="text-center">
           <h1 style={{ 
-            // fontFamily: "New Tegomin, serif" 
+            fontFamily: "New Tegomin, serif" 
             }}>
             {parseInt(roundName.split(".")[0]) === 4 ? "Final" : `${roundName}`}{" "}
             <br />
