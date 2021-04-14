@@ -56,12 +56,6 @@ function App() {
     return reload;
   };
 
-  const getInf = () => {
-    var iframe = document.getElementById("frm");
-    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-    console.log(innerDoc, "wwwwwwwwwwwww");
-  };
-
   return (
     <Container fluid>
       <RoundInfo
@@ -95,17 +89,6 @@ function App() {
           roundName={roundName}
         />
       </Row>
-
-      <iframe
-        onLoad={getInf}
-        id="frm"
-        src="https://webtrader.sekizfx8.com"
-        name="iframe_a"
-        height="1200px"
-        width="100%"
-        scrolling="yes"
-        title="Iframe Example"
-      ></iframe>
     </Container>
   );
 }
